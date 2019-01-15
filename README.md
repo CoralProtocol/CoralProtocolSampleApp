@@ -4,7 +4,7 @@ Coral's Trust Score Alerts allow someone to subscribe to changes in an Ethereum 
 
 Trust Score Alerts operate as webhooks, where the documentation can be found at [docs.heycoral.com](https://docs.heycoral.com/#a4c802a5-dbd3-4f6b-b351-ae81a4e3c659).
 
-This repository serves as a sample app that you can clone and use, that receives Trust Score Alerts. From there you can write your own (or contribute! 😊) integrations. A Twilio integration is provided as an example. Expect a Slack integration soon.
+This repository serves as a sample app that you can clone and use, that receives Trust Score Alerts. From there you can write your own (or contribute! 😊) integrations. Twilio and Slack integrations are provided as examples.
 
 
 ### Setup

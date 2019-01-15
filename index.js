@@ -7,9 +7,9 @@ const compress = require('compression')();
 const expressValidator = require('express-validator');
 const cors = require('cors');
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+const twilioClient = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const { WebClient } = require('@slack/client');
+const slackClient = new WebClient(process.env.SLACK_TOKEN);
 
 const port = process.env.PORT;
 
@@ -29,15 +29,32 @@ app.post('/', (req, res, next) => {
   return res.status(200).send(`heycoral.com 🐙 trust score alert ${req.body.name} on address ${req.body.address}; 🎉`);
 });
 
-app.post('/text-me', (req, res, next) => {
-  client.messages
+/*
+This integration uses Twilio to text TO_PHONE number when an alert is triggered
+*/
+app.post('/twilio', (req, res, next) => {
+  twilioClient.messages
   .create({
      body: `heycoral.com 🐙 trust score alert ${req.body.name} on address ${req.body.address}; 🎉`,
-     from: '+14159428108',
-     to: process.env.TWILIO_PHONE_NUMBER
+     from: process.env.TWILIO_FROM_PHONE_NUMBER,
+     to: process.env.TWILIO_TO_PHONE_NUMBER
    })
   .then(message => console.log(message.sid))
   .done();
+
+  console.log(req.body);
+  return res.status(200).send('🎉');
+});
+
+/*
+This integration uses Slack to message channel SLACK_CONVERSATION_ID when an alert is triggered
+*/
+app.post('/slack', (req, res, next) => {
+  slackClient.chat.postMessage({ channel: process.env.SLACK_CONVERSATION_ID, text: `heycoral.com 🐙 trust score alert ${req.body.name} on address ${req.body.address}; 🎉` })
+  .then((res) => {
+    console.log('Message sent: ', res.ts);
+  })
+  .catch(console.error);
 
   console.log(req.body);
   return res.status(200).send('🎉');
