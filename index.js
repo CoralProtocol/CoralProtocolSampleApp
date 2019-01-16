@@ -50,8 +50,17 @@ app.post('/twilio', (req, res, next) => {
 This integration uses Slack to message channel SLACK_CONVERSATION_ID when an alert is triggered
 */
 app.post('/slack', (req, res, next) => {
-  slackClient.chat.postMessage({ channel: process.env.SLACK_CONVERSATION_ID, text: `heycoral.com 🐙 trust score alert ${req.body.name} on address ${req.body.address}; 🎉` })
-  .then((res) => {
+  slackClient.chat.postMessage({
+    channel: process.env.SLACK_CONVERSATION_ID,
+    text: `
+      🚨 Coral Protocol Trust Score Alert 🚨 \n
+      🐙 *Alert Name:* \`${req.body.name}\` \n
+      🐙 *Action Type:* \`${req.body.action}\` \n
+      🐙 *Address:* \`${req.body.address}\` \n
+      🐙 *Blockchain:* \`${req.body.blockchain}\` \n
+      Thanks for keeping the blockchain safe 🎉
+    `
+  }).then((res) => {
     console.log('Message sent: ', res.ts);
   })
   .catch(console.error);
