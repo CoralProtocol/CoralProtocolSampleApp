@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "plugin:promise/recommended",
+    "airbnb-base",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:security/recommended"
+  ],
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": ["jest", "prettier", "promise", "security"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
