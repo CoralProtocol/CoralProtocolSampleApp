@@ -1,10 +1,12 @@
-## Trust Score Alerting Sample Webhook Server
+## Coral Protocol Sample App
+
+This app serves as an example of how to integrate Coral Protocol into your application. There are examples of how to `get` Trust Scores, set Trust Score Alerts, and consume those alerts.
 
 Coral's Trust Score Alerts allow someone to subscribe to changes in an Ethereum or Bitcoin address' trust score.
 
 Trust Score Alerts operate as webhooks, where the documentation can be found at [docs.heycoral.com](https://docs.heycoral.com/#a4c802a5-dbd3-4f6b-b351-ae81a4e3c659).
 
-This repository serves as a sample app that you can clone and use, that receives Trust Score Alerts. From there you can write your own (or contribute! 😊) integrations. Twilio and Slack integrations are provided as examples.
+This repository serves as a sample app that you can clone and use. From there you can write your own (or contribute! 😊) integrations. Twilio and Slack integrations are provided as examples.
 
 
 ### Setup
@@ -12,7 +14,7 @@ This repository serves as a sample app that you can clone and use, that receives
 
 `npm install`
 
-Copy `env.dist` to `.env` and fill it with your own secrets
+Copy `env.dist` to `.env` and fill it with your own secrets. Most notably, you will need to use your Coral API key.
 
 ### Development
 We use [ngrok](https://ngrok.com/) to expose this application to the internet, so Coral's API can reach it.
